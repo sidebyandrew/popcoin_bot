@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "dev": "export NODE_ENV=dev  && tsc botgame.ts  && node botgame.js",
+    "start": "node botgame.js",
+    "lint": "next lint"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.9",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "grammy": "^1.19.2",
+    "socks-proxy-agent": "^8.0.2",
+    "ts-node": "^10.9.1"
+  }
+}
