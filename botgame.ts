@@ -23,9 +23,9 @@ async function abc() {
     const bot = new Bot("6811958485:AAHg_96h1PMJIrvbwOM9j4Pcx8uaEVK48B4", config);
 
     const labelDataPairs = [
-        ["Jump3D", "jump3d"],
-        ["Fruit Archer", "fruit_archer"],
-        ["Shoot Hoops", "shoot_hoops"],
+        ["Jump 3D", "callback-jump_3d"],
+        ["Fruit Archer", "callback-fruit_archer"],
+        ["Shoot Hoops", "callback-shoot_hoops"],
     ];
     const buttonRow = labelDataPairs
         .map(( [label, data] ) => InlineKeyboard.text(label, data));
@@ -41,92 +41,39 @@ async function abc() {
         await ctx.reply(" Click to Play Our Fantastic Game ", {reply_markup: inlineKeyboard,})
     });
 
-    bot.command("wallet", async (ctx) => {
-        const labelDataPairs = [
-            ["Bind", "bind"],
-            ["Deposit", "Deposit"],
-            ["Withdraw", "Withdraw"],
-        ];
-        const buttonRow = labelDataPairs
-            .map(([label, data]) => InlineKeyboard.text(label, data));
-        const walletKeyboard = InlineKeyboard.from([buttonRow]);
-        await ctx.reply(" Wallet [ Under Construction ] ", {reply_markup: walletKeyboard,})
-    });
 
-    bot.command("menu", async (ctx) => {
-        await ctx.reply(" Click to Play Our Fantastic Game ", {reply_markup: inlineKeyboard,})
-    });
-
-    bot.command("settings", async (ctx) => {
-        await ctx.reply(" Click to Play Our Fantastic Game ", {reply_markup: inlineKeyboard,})
-    });
-
-    bot.command("languages", async (ctx) => {
-        const labelDataPairs = [
-            ["English", "english"],
-            ["中文（简体）", "sc"],
-            ["中文（繁體）", "cc"],
-        ];
-        const buttonRow = labelDataPairs
-            .map(([label, data]) => InlineKeyboard.text(label, data));
-        const walletKeyboard = InlineKeyboard.from([buttonRow]);
-        await ctx.reply(" Language Support [ Under Construction ] ", {reply_markup: walletKeyboard,})
-    });
 
     // Wait for click events with specific callback data.
     // 监听 点击 回调事件
-    bot.callbackQuery("jump3d", async (ctx) => {
-        await ctx.replyWithGame("jump3d");
+    bot.callbackQuery("callback-jump_3d", async (ctx) => {
+        await ctx.replyWithGame("jump_3d");
+        });
 
+    bot.callbackQuery("callback-fruit_archer", async (ctx) => {
+        await ctx.replyWithGame("fruit_archer_challenge");
     });
 
-    bot.callbackQuery("fruit_archer", async (ctx) => {
-        await ctx.replyWithGame("fruit_archer");
-    });
-
-    bot.callbackQuery("shoot_hoops", async (ctx) => {
+    bot.callbackQuery("callback-shoot_hoops", async (ctx) => {
         await ctx.replyWithGame("shoot_hoops");
     });
 
     // 监听游戏按钮的回调
     bot.on("callback_query:game_short_name", async (ctx) => {
-        let gameUrl = "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/3djump/h5/index.html";
-        if (ctx.update.callback_query.game_short_name == 'jump3d') {
-            gameUrl = "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/3djump/h5/index.html";
-        }else if(ctx.update.callback_query.game_short_name == 'fruit_archer') {
-            gameUrl = "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/archer/h5/index.html";
-        }else if (ctx.update.callback_query.game_short_name == 'shoot_hoops') {
-            gameUrl = "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/basketball/h5/index.html";
-        }
+        const gameUrlMap = new Map<string, string>();
+        gameUrlMap.set("jump_3d", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/3djump/h5/index.html");
+        gameUrlMap.set("fruit_archer_challenge", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/archer/h5/index.html");
+        gameUrlMap.set("shoot_hoops", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/basketball/h5/index.html");
+        gameUrlMap.set("meta_winner", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/ton_pvp_web2/index.html");
+        gameUrlMap.set("jaws", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/shks/web/index.html");
+        gameUrlMap.set("popstar", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/xmxx/web/index.html");
+        gameUrlMap.set("amaze", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/amze/web/index.html");
+        gameUrlMap.set("chess", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/chess/web/index.html");
+        let gameShortName = ctx.update.callback_query.game_short_name;
+         let gameUrl = gameUrlMap.get(gameShortName);
 
         await ctx.answerCallbackQuery({url: gameUrl});
-
-
     });
 
-
-    // 处理消息
-    bot.on("message", async (ctx) => {
-            if (ctx.message.text === '游戏') {
-                await ctx.reply(" Click to Play Our Fantastic Game ", {reply_markup: inlineKeyboard,})
-            }
-
-            if (ctx.message.text === '游戏1') {
-                await ctx.replyWithGame("jumpjump");
-            }
-
-            if (ctx.message.text === '游戏2') {
-                await ctx.replyWithGame("endless_basketball");
-            }
-
-        if (ctx.message.text === '游戏3') {
-            await ctx.replyWithGame("fruit_arrow");
-        }
-        }
-    );
-
-
-    // https://grammy.dev/guide/deployment-types
     await bot.start();
 }
 
