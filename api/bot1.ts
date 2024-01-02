@@ -61,7 +61,7 @@ async function abc() {
     bot.command("start", (ctx) => ctx.reply("Welcome! Up and running."));
 
     bot.command("wallet", async (ctx) => {
-        await ctx.reply("回复一下你的钱包地址", {
+        await ctx.reply("Your wallet address?", {
             // 让 Telegram 客户端自动向用户显示回复界面。
             reply_markup: {force_reply: true},
         });

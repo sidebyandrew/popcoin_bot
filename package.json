@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "export NODE_ENV=dev  && tsc botgame.ts  && node botgame.js",
+    "dev": "export NODE_ENV=dev  && nodemon botgame.ts ",
     "start": "node botgame.js",
     "lint": "next lint"
   },

@@ -1,9 +1,9 @@
-import {Bot, InlineKeyboard} from "grammy";
+import {Bot, Context, InlineKeyboard} from "grammy";
 import {SocksProxyAgent} from "socks-proxy-agent";
+import {Message} from "grammy/out/types";
 
 
 async function abc() {
-
     console.log(" process.env.NODE_ENV=" + process.env.NODE_ENV)
     const socksAgent = new SocksProxyAgent("socks://127.0.0.1:7890");
 
@@ -20,7 +20,8 @@ async function abc() {
     }
 
     //The open game bot
-    const bot = new Bot("6811958485:AAHg_96h1PMJIrvbwOM9j4Pcx8uaEVK48B4", config);
+    // const bot = new Bot("6811958485:AAHg_96h1PMJIrvbwOM9j4Pcx8uaEVK48B4", config);//Popcoin
+    const bot = new Bot("6861683528:AAE9lxffvAsuUVTuf5qyOEWmH8STQgaQeE4", config);//OPEN game
 
     const labelDataPairs = [
         ["Jump 3D", "callback-jump_3d"],
@@ -41,20 +42,44 @@ async function abc() {
         await ctx.reply(" Click to Play Our Fantastic Game ", {reply_markup: inlineKeyboard,})
     });
 
+    bot.command("settings", async (ctx) => {
+        await ctx.reply(" Click to Play Our Fantastic Game ", {reply_markup: inlineKeyboard,})
+    });
 
+    bot.command("languages", async (ctx) => {
+        const labelDataPairs = [
+            ["English", "english"],
+            ["中文（简体）", "sc"],
+            ["中文（繁體）", "cc"],
+        ];
+        const buttonRow = labelDataPairs
+            .map(([label, data]) => InlineKeyboard.text(label, data));
+        const walletKeyboard = InlineKeyboard.from([buttonRow]);
+        await ctx.reply(" Language Support [ Under Construction ] ", {reply_markup: walletKeyboard,})
+    });
+
+    bot.command("wallet", async (ctx) => {
+        await ctx.reply("Your wallet address?", {
+            // 让 Telegram 客户端自动向用户显示回复界面。
+            reply_markup: {force_reply: true},
+        });
+    });
 
     // Wait for click events with specific callback data.
     // 监听 点击 回调事件
     bot.callbackQuery("callback-jump_3d", async (ctx) => {
-        await ctx.replyWithGame("jump_3d");
-        });
+        let msg = await ctx.replyWithGame("jump_3d");
+        setGameScore(msg, ctx);
+    });
 
     bot.callbackQuery("callback-fruit_archer", async (ctx) => {
-        await ctx.replyWithGame("fruit_archer_challenge");
+        let msg = await ctx.replyWithGame("fruit_archer_challenge");
+        setGameScore(msg, ctx)
     });
 
     bot.callbackQuery("callback-shoot_hoops", async (ctx) => {
-        await ctx.replyWithGame("shoot_hoops");
+        let msg = await ctx.replyWithGame("shoot_hoops");
+        setGameScore(msg, ctx)
     });
 
     // 监听游戏按钮的回调
@@ -77,4 +102,27 @@ async function abc() {
     await bot.start();
 }
 
+function setGameScore(gameMsg: Message.GameMessage, ctx: Context) {
+    let chatId = gameMsg.chat.id;
+    let messageId = gameMsg.message_id;
+    let userId = gameMsg.chat.id;
+    let fromId = gameMsg.from?.id;
+
+    if (chatId && messageId && userId && fromId) {
+        const currentDate = new Date();
+        const hours = currentDate.getHours();
+        const minutes = currentDate.getMinutes();
+        const seconds = currentDate.getSeconds();
+        const score =
+            hours * 10000 + minutes * 100 + seconds;
+
+        ctx.api.setGameScore(chatId, messageId, userId, score).catch((e) => {
+            console.error(e)
+        });
+
+        ctx.api.setGameScore(chatId, messageId, fromId, score - currentDate.getSeconds()).catch((e) => {
+            console.error(e)
+        });
+    }
+}
 abc().then(r => console.info(r))
