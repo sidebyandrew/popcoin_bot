@@ -20,7 +20,7 @@ async function abc() {
     }
 
     //The open game bot
-    const bot = new Bot("6811958485:AAHg_96h1PMJIrvbwOM9j4Pcx8uaEVK48B4", config);
+    const bot = new Bot("", config);
     bot.api.sendGame(5499157826, 'jump3d').then(()=>{
         console.info("ok")
     });
