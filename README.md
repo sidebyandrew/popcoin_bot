@@ -1,7 +1,10 @@
 
-# npx tsc
 
-// npx 是 node package Executor，可以直接运行 node包中的命令
-// tsc 是 TypeScript Compiler 编译器命令。将 ts 编译成 js
+# Dev Env 
 
-# node bot.js
+ Need to set proxy for dev env, use 'export NODE_ENV=dev' to trigger default proxy.
+ 
+
+
+# Production Env
+

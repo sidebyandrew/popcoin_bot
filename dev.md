@@ -1,3 +1,3 @@
 export DEBUG="grammy*"
 
-ts-node botgame.ts
+ts-node bot.ts
