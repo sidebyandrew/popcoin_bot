@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "dev": "export NODE_ENV=dev  && nodemon botgame.ts ",
-    "start": "node botgame.js",
+    "dev": "export NODE_ENV=dev && export DEBUG='grammy*' && nodemon bot.ts ",
+    "start": "node bot.js",
     "lint": "next lint"
   },
   "devDependencies": {

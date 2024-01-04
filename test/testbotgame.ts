@@ -35,7 +35,10 @@ async function abc() {
     // 处理 /start 命令。
     bot.command("start", async (ctx) => {
         console.info(JSON.stringify(ctx))
-        await ctx.reply(" Click to Play Our Fantastic Game ", {reply_markup: inlineKeyboard,})
+        await ctx.reply(
+            " Click to open [Popcoin Games](https://t.me/ThePopcoinBot/app)",
+            { parse_mode: "MarkdownV2" },
+        );
     });
 
     bot.command("games", async (ctx) => {
