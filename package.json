@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "dev_opengame": "export NODE_ENV=dev && export DEBUG='grammy*' && nodemon devgamebot.ts ",
     "dev": "export NODE_ENV=dev && export DEBUG='grammy*' && nodemon bot.ts ",
     "start": "node bot.js",
     "lint": "next lint"

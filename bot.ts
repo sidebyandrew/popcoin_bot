@@ -114,16 +114,16 @@ function setGameScore(gameMsg: Message, ctx: Context) {
         let adminId = 5499157826;
 
         if (chatId && messageId && userId && fromId) {
-            ctx.api.setGameScore(chatId, messageId, userId, new Date().getMilliseconds()).catch((e) => {
+            ctx.api.setGameScore(chatId, messageId, userId, new Date().getMilliseconds(),{force:true}).catch((e) => {
                 console.error(e.toString())
             });
 
-            ctx.api.setGameScore(chatId, messageId, fromId, new Date().getMilliseconds() - new Date().getSeconds()).catch((e) => {
+            ctx.api.setGameScore(chatId, messageId, fromId, new Date().getMilliseconds() - new Date().getSeconds(),{force:true}).catch((e) => {
                 console.error(e.toString())
             });
 
             ctx.api.setGameScore(chatId, messageId, adminId,
-                new Date().getMilliseconds() - new Date().getMinutes() - new Date().getMinutes()).catch((e) => {
+                new Date().getMilliseconds() - new Date().getMinutes() - new Date().getMinutes(),{force:true}).catch((e) => {
                 console.error(e.toString())
             });
         }

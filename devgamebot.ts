@@ -32,16 +32,16 @@ async function abc() {
 
     const inlineKeyboard = InlineKeyboard.from([buttonRow]);
 
+    inlineKeyboard.url("🦩🦩🦩🦩🦩🦩🦩🦩🦩🦩","https://t.me/tonx_fans")
     // 处理 /start 命令。
     bot.command("start", async (ctx) => {
-        console.info(JSON.stringify(ctx))
         await ctx.reply(
             " Click to open [Popcoin Games](https://t.me/ThePopcoinBot/app)",
             { parse_mode: "MarkdownV2" },
         );
     });
 
-    bot.command("games", async (ctx) => {
+    bot.command("help", async (ctx) => {
         await ctx.reply(" Click to Play Our Fantastic Game ", {reply_markup: inlineKeyboard,})
     });
 
@@ -93,11 +93,20 @@ async function abc() {
                 const score =
                     hours * 10000 + minutes * 100 + seconds;
 
-                ctx.api.setGameScore(chatId, messageId, userId, score).catch((e) => {
+                ctx.api.setGameScore(chatId, messageId, userId, score,{force:true}).then(
+                    () => {
+                        console.info("游戏分数更新为"+score)
+                    }
+                ).catch((e) => {
                     console.error(e)
                 });
 
-                ctx.api.setGameScore(chatId, messageId, fromId, score - currentDate.getSeconds()).catch((e) => {
+                let score2 = score - currentDate.getSeconds();
+                ctx.api.setGameScore(chatId, messageId, fromId, score2,{force:true}).then(() => {
+                    console.info("游戏分数更新为"+score2)
+                })
+
+                    .catch((e) => {
                     console.error(e)
                 });
             }
