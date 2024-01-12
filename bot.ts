@@ -81,18 +81,19 @@ async function abc() {
     bot.on("callback_query:game_short_name", async (ctx) => {
         try {
             let gameMsg = ctx.callbackQuery.message;
+            let searchParams = '';
             if (gameMsg) {
-                setGameScore(gameMsg, ctx);
+                 searchParams = setGameScore(gameMsg, ctx);
             }
             const gameUrlMap = new Map<string, string>();
-            gameUrlMap.set("jump_3d", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/3djump/h5/index.html");
-            gameUrlMap.set("fruit_archer_challenge", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/archer/h5/index.html");
-            gameUrlMap.set("shoot_hoops", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/basketball/h5/index.html");
-            gameUrlMap.set("meta_winner", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/ton_pvp_web2/index.html");
-            gameUrlMap.set("jaws", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/shks/web/index.html");
-            gameUrlMap.set("popstar", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/xmxx/web/index.html");
-            gameUrlMap.set("amaze", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/amze/web/index.html");
-            gameUrlMap.set("chess", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/chess/web/index.html");
+            gameUrlMap.set("jump_3d", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/3djump/h5/index.html"+searchParams);
+            gameUrlMap.set("fruit_archer_challenge", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/archer/h5/index.html"+searchParams);
+            gameUrlMap.set("shoot_hoops", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/basketball/h5/index.html"+searchParams);
+            gameUrlMap.set("meta_winner", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/ton_pvp_web2/index.html"+searchParams);
+            gameUrlMap.set("jaws", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/shks/web/index.html"+searchParams);
+            gameUrlMap.set("popstar", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/xmxx/web/index.html"+searchParams);
+            gameUrlMap.set("amaze", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/amze/web/index.html"+searchParams);
+            gameUrlMap.set("chess", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/chess/web/index.html"+searchParams);
             let gameShortName = ctx.update.callback_query.game_short_name;
             let gameUrl = gameUrlMap.get(gameShortName);
             await ctx.answerCallbackQuery({url: gameUrl});
@@ -104,9 +105,8 @@ async function abc() {
     await bot.start();
 }
 
-function setGameScore(gameMsg: Message, ctx: Context) {
+function setGameScore(gameMsg: Message, ctx: Context):string {
     try {
-        console.info("setGameScore");
         let chatId = gameMsg.chat.id;
         let messageId = gameMsg.message_id;
         let userId = gameMsg.chat.id;
@@ -126,9 +126,13 @@ function setGameScore(gameMsg: Message, ctx: Context) {
                 new Date().getMilliseconds() - new Date().getMinutes() - new Date().getMinutes(),{force:true}).catch((e) => {
                 console.error(e.toString())
             });
+
+            return "?p_chat_id=" + chatId + "&p_msg_id=" + messageId + "&p_tg_id=" + userId;
         }
+        return '';
     } catch (e){
         console.error(e)
+        return '';
     }
 }
 
