@@ -68,9 +68,9 @@ export async function register_popcoin_bot(bot: Bot<MyContext>) {
                 searchParams = setGameScore(gameMsg, ctx);
             }
             const gameUrlMap = new Map<string, string>();
-            gameUrlMap.set("jump_3d", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/3djump/h5/index.html"+searchParams);
-            gameUrlMap.set("fruit_archer_challenge", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/archer/h5/index.html"+searchParams);
-            gameUrlMap.set("shoot_hoops", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/basketball/h5/index.html"+searchParams);
+            gameUrlMap.set("jump_3d", "https://tg-games-1256660609.cos.ap-chengdu.myqcloud.com/3djump/h5/index.html"+searchParams);
+            gameUrlMap.set("fruit_archer_challenge", "https://tg-games-1256660609.cos.ap-chengdu.myqcloud.com/archer/h5/index.html"+searchParams);
+            gameUrlMap.set("shoot_hoops", "https://tg-games-1256660609.cos.ap-chengdu.myqcloud.com/basketball/h5/index.html"+searchParams);
             gameUrlMap.set("meta_winner", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/ton_pvp_web2/index.html"+searchParams);
             gameUrlMap.set("jaws", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/shks/web/index.html"+searchParams);
             gameUrlMap.set("popstar", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/xmxx/web/index.html"+searchParams);
@@ -91,21 +91,21 @@ function setGameScore(gameMsg: Message, ctx: Context):string {
         let messageId = gameMsg.message_id;
         let userId = gameMsg.chat.id;
         let fromId = gameMsg.from?.id;
-        let adminId = 5499157826;
+        // let adminId = 5499157826;
 
         if (chatId && messageId && userId && fromId) {
-            ctx.api.setGameScore(chatId, messageId, userId, new Date().getMilliseconds(),{force:true}).catch((e) => {
-                console.error(e.toString())
-            });
-
-            ctx.api.setGameScore(chatId, messageId, fromId, new Date().getMilliseconds() - new Date().getSeconds(),{force:true}).catch((e) => {
-                console.error(e.toString())
-            });
-
-            ctx.api.setGameScore(chatId, messageId, adminId,
-                new Date().getMilliseconds() - new Date().getMinutes() - new Date().getMinutes(),{force:true}).catch((e) => {
-                console.error(e.toString())
-            });
+            // ctx.api.setGameScore(chatId, messageId, userId, new Date().getMilliseconds(),{force:true}).catch((e) => {
+            //     console.error(e.toString())
+            // });
+            //
+            // ctx.api.setGameScore(chatId, messageId, fromId, new Date().getMilliseconds() - new Date().getSeconds(),{force:true}).catch((e) => {
+            //     console.error(e.toString())
+            // });
+            //
+            // ctx.api.setGameScore(chatId, messageId, adminId,
+            //     new Date().getMilliseconds() - new Date().getMinutes() - new Date().getMinutes(),{force:true}).catch((e) => {
+            //     console.error(e.toString())
+            // });
 
             return "?p_chat_id=" + chatId + "&p_msg_id=" + messageId + "&p_tg_id=" + userId;
         }

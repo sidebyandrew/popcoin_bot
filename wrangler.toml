@@ -12,4 +12,4 @@ vars = { ENVIRONMENT = "staging_bot", TELEGRAM_BOT_API_TOKEN = "staging_bot", TE
 
 
 [env.thepopcoinbot]
-vars = { ENVIRONMENT = "thepopcoinbot", TELEGRAM_BOT_API_TOKEN = "6811958485:AAFtOWH3d-5lFCmZmyV1CS_cTNRCjtW4PVg", TELEGRAM_BOT_SECRET_TOKEN = "popcoinbotv1" }
+vars = { ENVIRONMENT = "thepopcoinbot", TELEGRAM_BOT_API_TOKEN = "6811958485:AAFJdiXhF3rrV11OKzewGoaKjCoOghY1DmA", TELEGRAM_BOT_SECRET_TOKEN = "popcoinbotv1" }

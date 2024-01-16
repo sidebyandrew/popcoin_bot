@@ -3,6 +3,6 @@ https://api.telegram.org/bot6974828212:AAFZzNoM6Wsv8jI75JsZ8ukbzVuy-CtFvB8/setWe
 
 
 == Cloudflare  @@ThePopcoinBot
-https://api.telegram.org/bot6811958485:AAFtOWH3d-5lFCmZmyV1CS_cTNRCjtW4PVg/setWebhook?url=https://popcoinbot-thepopcoinbot.andrew-sideby.workers.dev/
+https://api.telegram.org/bot6811958485:AAFJdiXhF3rrV11OKzewGoaKjCoOghY1DmA/setWebhook?url=https://popcoinbot-thepopcoinbot.andrew-sideby.workers.dev/
 
 popcoinbotv1
