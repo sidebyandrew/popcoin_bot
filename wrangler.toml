@@ -1,0 +1,15 @@
+# @OpenVipBot d96a38e52c83fcffe44f947b1d476a4f
+account_id = 'd96a38e52c83fcffe44f947b1d476a4f'
+name = "popcoinbot"
+main = "src/entrypoint.cloudflare.ts"
+node_compat = true
+compatibility_date = "2024-01-12"
+vars = { ENVIRONMENT = "local", TELEGRAM_BOT_API_TOKEN = "NO NEED LOCAL", TELEGRAM_BOT_SECRET_TOKEN = "popcoinbotv1" }
+
+
+[env.staging_bot]
+vars = { ENVIRONMENT = "staging_bot", TELEGRAM_BOT_API_TOKEN = "staging_bot", TELEGRAM_BOT_SECRET_TOKEN = "popcoinbotv1" }
+
+
+[env.thepopcoinbot]
+vars = { ENVIRONMENT = "thepopcoinbot", TELEGRAM_BOT_API_TOKEN = "6811958485:AAFtOWH3d-5lFCmZmyV1CS_cTNRCjtW4PVg", TELEGRAM_BOT_SECRET_TOKEN = "popcoinbotv1" }

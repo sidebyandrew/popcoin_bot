@@ -1,17 +1,25 @@
 {
   "scripts": {
-    "dev_opengame": "export NODE_ENV=dev && export DEBUG='grammy*' && nodemon devgamebot.ts ",
-    "dev": "export NODE_ENV=dev && export DEBUG='grammy*' && nodemon bot.ts ",
-    "start": "node bot.js",
-    "lint": "next lint"
+    "dev_DevTonMasterBot": "@DevTonMasterBot 6913454221:AAEEZK6b1gfNl079JOKuONVS3yTo5ejoaB8",
+    "run_dev": "export BOT_TOKEN=6913454221:AAEEZK6b1gfNl079JOKuONVS3yTo5ejoaB8 && export NODE_ENV=dev && export DEBUG='grammy*' && nodemon src/entrypoint.local.ts",
+    "wrangler_dev": "wrangler dev",
+    "deploy_dev": "wrangler deploy",
+    "deploy_openvip": "wrangler deploy --env openvip",
+    "deploy_thepopcoinbot": "wrangler deploy --env thepopcoinbot",
+    "test": "vitest"
   },
   "devDependencies": {
     "@types/node-fetch": "^2.6.9",
     "typescript": "^5.3.2"
   },
   "dependencies": {
+    "@cloudflare/workers-types": "^4.20231218.0",
+    "@grammyjs/conversations": "^1.2.0",
+    "@grammyjs/i18n": "^1.0.1",
     "grammy": "^1.19.2",
+    "prettier": "^3.2.2",
     "socks-proxy-agent": "^8.0.2",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "wrangler": "^3.22.4"
   }
 }

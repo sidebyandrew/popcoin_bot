@@ -1,27 +1,9 @@
 import {Bot, Context, InlineKeyboard} from "grammy";
-import {SocksProxyAgent} from "socks-proxy-agent";
 import {Message} from "grammy/out/types";
+import {MyContext} from "./global.types";
 
 
-async function abc() {
-
-    console.log(" is dev env? process.env.NODE_ENV= " + process.env.NODE_ENV)
-    let config = {};
-    if (process.env.NODE_ENV === 'dev') {
-        config = {
-            client: {
-                baseFetchConfig: {
-                    agent: new SocksProxyAgent("socks://127.0.0.1:7890"),
-                    compress: true,
-                },
-            },
-        }
-    }
-
-    //The open game bot
-    const bot = new Bot("6811958485:AAFtOWH3d-5lFCmZmyV1CS_cTNRCjtW4PVg", config);//@ThePopcoinBot
-    // const bot = new Bot("6861683528:AAE9lxffvAsuUVTuf5qyOEWmH8STQgaQeE4", config);//OPEN game
-
+export async function register_popcoin_bot(bot: Bot<MyContext>) {
     const labelDataPairs = [
         ["Jump 3D", "callback-jump_3d"],
         ["Fruit Archer", "callback-fruit_archer"],
@@ -83,7 +65,7 @@ async function abc() {
             let gameMsg = ctx.callbackQuery.message;
             let searchParams = '';
             if (gameMsg) {
-                 searchParams = setGameScore(gameMsg, ctx);
+                searchParams = setGameScore(gameMsg, ctx);
             }
             const gameUrlMap = new Map<string, string>();
             gameUrlMap.set("jump_3d", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/3djump/h5/index.html"+searchParams);
@@ -101,8 +83,6 @@ async function abc() {
             console.error(e);
         }
     });
-
-    await bot.start();
 }
 
 function setGameScore(gameMsg: Message, ctx: Context):string {
@@ -136,4 +116,3 @@ function setGameScore(gameMsg: Message, ctx: Context):string {
     }
 }
 
-abc().then(r => console.info(r)).catch(r => console.info(r))
