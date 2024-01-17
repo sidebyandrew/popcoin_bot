@@ -71,11 +71,11 @@ export async function register_popcoin_bot(bot: Bot<MyContext>) {
             gameUrlMap.set("jump_3d", "https://tg-games-1256660609.cos.ap-chengdu.myqcloud.com/3djump/h5/index.html"+searchParams);
             gameUrlMap.set("fruit_archer_challenge", "https://tg-games-1256660609.cos.ap-chengdu.myqcloud.com/archer/h5/index.html"+searchParams);
             gameUrlMap.set("shoot_hoops", "https://tg-games-1256660609.cos.ap-chengdu.myqcloud.com/basketball/h5/index.html"+searchParams);
-            gameUrlMap.set("meta_winner", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/ton_pvp_web2/index.html"+searchParams);
-            gameUrlMap.set("jaws", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/shks/web/index.html"+searchParams);
-            gameUrlMap.set("popstar", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/xmxx/web/index.html"+searchParams);
-            gameUrlMap.set("amaze", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/amze/web/index.html"+searchParams);
-            gameUrlMap.set("chess", "https://h5game-1256660609.cos.ap-guangzhou.myqcloud.com/vs/chess/web/index.html"+searchParams);
+            gameUrlMap.set("meta_winner", "https://tg-games-1256660609.cos.ap-chengdu.myqcloud.com/metawin/h5/index.html"+searchParams);
+            gameUrlMap.set("jaws", "https://tg-games-1256660609.cos.ap-chengdu.myqcloud.com/jaws/h5/index.html"+searchParams);
+            gameUrlMap.set("popstar", "https://tg-games-1256660609.cos.ap-chengdu.myqcloud.com/xmxx/h5/index.html"+searchParams);
+            gameUrlMap.set("amaze", "https://tg-games-1256660609.cos.ap-chengdu.myqcloud.com/amaze/h5/index.html"+searchParams);
+            gameUrlMap.set("chess", "https://tg-games-1256660609.cos.ap-chengdu.myqcloud.com/chess/h5/index.html"+searchParams);
             let gameShortName = ctx.update.callback_query.game_short_name;
             let gameUrl = gameUrlMap.get(gameShortName);
             await ctx.answerCallbackQuery({url: gameUrl});
